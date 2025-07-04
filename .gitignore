@@ -1,0 +1,141 @@
+# Universal .gitignore
+
+# Node
+node_modules/
+dist/
+build/
+.env
+.env.*
+.nyc_output/
+coverage/
+lib-cov/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+ENV/
+*.env
+*.venv
+pip-log.txt
+pip-delete-this-directory.txt
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# Linux
+*~
+.nfs*
+
+# IDEs and editors
+.vscode/
+!.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.code-workspace
+*.sublime*
+*.iml
+
+# Logs
+logs/
+
+# Misc
+*.local
+*.lock
+*.bak
+*.tmp
+
+# Images
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.svg
+
+# Others
+.DS_Store
+*.pem
+*.crt
+*.key
+
+# System files
+ehthumbs.db
+Icon?
+
+# Test output
+junit.xml
+
+# Package distribution
+*.tgz
+
+# Dependency directories
+jspm_packages/
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+yarn.lock
+
+# dotenv environment variables file
+.env
+.env.*
+
+# Parcel-bundler cache
+.cache
+
+# Next.js build output
+.next/
+
+# Nuxt.js build output
+.nuxt/
+
+# Gatsby files
+.cache/
+public
+
+# vuepress build output
+.vuepress/dist
+
+# Serverless directories
+.serverless/
+
+# FuseBox cache
+.fusebox/
+
+# DynamoDB Local files
+db.local/
+
+# TernJS port file
+.tern-port

@@ -6,6 +6,8 @@ import { Server } from "socket.io";
 import { connectDB } from "./lib/db.js";
 import userRouter from "./routes/user.route.js";
 import messageRouter from "./routes/message.route.js";
+import cookieParser from "cookie-parser";
+import User from "./models/user.js";
 
 const app = express();
 
@@ -27,17 +29,27 @@ io.on("connection", (socket) => {
     userSocketMap[userId] = socket.id;
     io.emit("getOnlineUsers", Object.keys(userSocketMap));
 
-    socket.on("disconnect", () => {
+    socket.on("disconnect", async () => {
       console.log("User disconnected:", userId);
       delete userSocketMap[userId];
       io.emit("getOnlineUsers", Object.keys(userSocketMap));
+
+      try {
+        await User.findByIdAndUpdate(userId, {lastSeen: new Date()});
+      } catch (error) {
+        console.log(error);
+      }
     });
   }
 });
 
 // Middlewares
 app.use(express.json({ limit: "4mb" }));
-app.use(cors());
+app.use(cors({
+  origin: ["http://localhost:5173", "http://localhost:5174"], 
+  credentials: true                                           
+}));
+app.use(cookieParser());
 
 app.get('/', (req, res)=>{
   res.status(200).json({

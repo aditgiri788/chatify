@@ -8,7 +8,7 @@ import RightSidebar from "../components/RightSidebar";
 const HomePage = () => {
   const [selectedUser, setSelectedUser] = useState(false); // moved inside component
   return (
-    <div className="border w-full h-screen sm:px-[15%] sm:py-[5%]">
+    <div className="border max-w-screen-lg mx-auto h-svh">
       <div
         className={`backdrop-blur-xl  border-2 border-gray-600 
            rounded-2xl overflow-hidden h-[100%] grid grid-cols-1 relative ${
@@ -19,15 +19,15 @@ const HomePage = () => {
       >
         <Sidebar
           selectedUser={selectedUser}
-          setselectedUser={setSelectedUser}
+          setSelectedUser={setSelectedUser}
         />
         <ChatContainer
           selectedUser={selectedUser}
-          setselectedUser={setSelectedUser}
+          setSelectedUser={setSelectedUser}
         />
         <RightSidebar
           selectedUser={selectedUser}
-          setselectedUser={setSelectedUser}
+          setSelectedUser={setSelectedUser}
         />
       </div>
     </div>
