@@ -4,7 +4,7 @@ import { useAuthStore } from "../stores/authStore";
 import { Loader2 } from "lucide-react";
 
 const LoginPage = () => {
-  const {signup, isSigningUp, login, isLogingIn} = useAuthStore();
+  const { signup, isSigningUp, login, isLogingIn } = useAuthStore();
   const [currState, setCurrState] = useState("Signup");
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -14,17 +14,28 @@ const LoginPage = () => {
 
   const onsubmitHandler = async (e) => {
     e.preventDefault();
-    if (currState == "Signup" && !isdataSubmited) {
+
+    if (currState === "Signup") {
+      if (!isdataSubmited) {
+        // First step - validate email/password and show bio field
+        setIsDataSubmited(true);
+        return;
+      }
+
+      // Second step - submit all data including bio
       const userData = {
         fullName,
         email,
         password,
         bio,
-      }
+      };
       await signup(userData);
-      setIsDataSubmited(true);
-      
       return;
+    }
+
+    // Handle login case
+    if (currState === "Login") {
+      await login({ email, password });
     }
   };
 
@@ -106,8 +117,12 @@ const LoginPage = () => {
           disabled={isSigningUp || isLogingIn}
           className="py-3 flex items-center gap-2 justify-center bg-gradient-to-r from bg-purple-400 to-violet-600 text-white rounded-md cursor-pointer"
         >
-          {currState === "Signup" ? "Create Account" : "Login"}
-          {(isSigningUp || isLogingIn) && <Loader2 className="animate-spin"/> }
+          {currState === "Signup"
+            ? isdataSubmited
+              ? "Complete Signup"
+              : "Continue"
+            : "Login"}
+          {(isSigningUp || isLogingIn) && <Loader2 className="animate-spin" />}
         </button>
 
         <div className="flex items-center gap-2 text-sm text-gray-500 ">
