@@ -7,13 +7,13 @@ const messageSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
-    receiverId: {  // ✅ Also fix the typo: "reciverId" → "receiverId"
+    receiverId: {  
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
     },
     text: { type: String },
-    image: { type: String },
+    file: { type: String },
     seen: { type: Boolean, default: false },
   },
   { timestamps: true }

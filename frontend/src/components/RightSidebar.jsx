@@ -49,7 +49,7 @@ const RightSidebar = ({ selectedUser }) => {
 
   return (
     selectedUser && (
-      <div className={`bg-[#0f0e17]/80 text-white w-full h-full flex flex-col ${selectedUser ? "max-md:hidden" : ""}`}>
+      <div className={`bg-[#0f0e17]/80 text-white w-full h-full overflow-y-auto  ${selectedUser ? "max-md:hidden" : ""}`}>
         {/* User Profile Section */}
         <div className="p-6 flex flex-col items-center gap-4 text-center border-b border-[#393a5a]">
           <div className="relative">
@@ -121,19 +121,6 @@ const RightSidebar = ({ selectedUser }) => {
               <span className="text-gray-400">Joined:</span> {new Date(selectedUser.createdAt).toLocaleDateString()}
             </p>
           </div>
-        </div>
-
-        {/* Action Buttons */}
-        <div className="p-4 cursor-pointer border-t border-[#393a5a] space-y-2">
-          <button className="w-full py-2 px-4 bg-[#1a1a2e] hover:bg-[#282142] text-white rounded-lg transition-all">
-            View Full Profile
-          </button>
-          <button 
-          onClick={logout}
-          className="w-full cursor-pointer py-2 px-4 bg-gradient-to-r from-purple-600 to-violet-700 hover:from-purple-800 hover:to-violet-800 text-white rounded-lg flex items-center justify-center gap-2 transition-all">
-            <LogOut className="h-4 w-4" />
-            Logout
-          </button>
         </div>
       </div>
     )
