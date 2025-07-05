@@ -1,24 +1,26 @@
-import multer from 'multer';
+import multer from "multer";
 
 const storage = multer.memoryStorage();
 
 export const upload = multer({
   storage,
-  limits: { fileSize: 5 * 1024 * 1024 }, // 5MB limit
+  limits: { fileSize: 50 * 1024 * 1024 }, // 5MB limit
   fileFilter: (req, file, cb) => {
-    const allowedTypes = ['image/jpeg', 'image/png'];
-    if (!allowedTypes.includes(file.mimetype)) {
-      return cb(new Error('Only JPEG and PNG files are allowed'), false);
+    const allowedTypes = ["image/", "video/"];
+    const isValid = allowedTypes.some((type) => file.mimetype.startsWith(type));
+    if (!isValid) {
+      return cb(new Error("Only images and videos are allowed"), false);
     }
+
     cb(null, true);
   },
 });
 
-export const handlefileUpload = (fieldName) =>{
+export const handlefileUpload = (fieldName) => {
   return (req, res, next) => {
-    upload.single(fieldName)(req, res, (err)=>{
-      if(err) return res.status(400).json({message: err.message});
+    upload.single(fieldName)(req, res, (err) => {
+      if (err) return res.status(400).json({ message: err.message });
       next();
-    })
-  }
-}
+    });
+  };
+};

@@ -8,6 +8,7 @@ export const uploadStream = (buffer, folder = "default_folder") => {
         folder,
         use_filename: true,
         unique_filename: false,
+        resource_type: "auto",
       },
       (error, result) => {
         if (error) return reject(error);
@@ -16,6 +17,7 @@ export const uploadStream = (buffer, folder = "default_folder") => {
         resolve({
           secure_url: result.secure_url,
           public_id: result.public_id,
+          resource_type: result.resource_type
         });
       }
     );

@@ -1,5 +1,5 @@
-import React from 'react';
-import Skeleton from './Skeleton';
+import React from "react";
+import Skeleton from "./Skeleton";
 
 const MessagesSkeleton = ({ length = 6 }) => {
   return (
@@ -9,20 +9,30 @@ const MessagesSkeleton = ({ length = 6 }) => {
         return (
           <div
             key={i}
-            className={`flex ${isSender ? 'justify-start' : 'justify-end'}`}
+            className={`flex ${isSender ? "justify-start" : "justify-end"}`}
           >
-            <div className={`flex gap-2 items-end ${isSender? 'flex-row' : 'flex-row-reverse'}`}>
-            <Skeleton className="size-6  aspect-square rounded-full"/>
-            <Skeleton
-              className={`px-4 py-2 max-w-[70%] rounded-lg ${
-                isSender
-                ? 'bg-neutral-500 rounded-bl-none'
-                : 'bg-neutral-600 rounded-br-none'
+            <div
+              className={`flex gap-2 items-end ${
+                isSender ? "flex-row" : "flex-row-reverse"
               }`}
-              >
-              <div className="h-4 min-w-20 w-[80%] bg-neutral-600 rounded" />
-            </Skeleton>
+            >
+              <Skeleton className="size-8 bg-violet-400/10 aspect-square rounded-full" />
+              <div className="space-y-2 w-full">
+                <Skeleton
+                  className={`p-4 w-60 flex-1 rounded-xl ${
+                    isSender
+                      ? "bg-violet-950/10 rounded-bl-none"
+                      : "bg-violet-400/10 rounded-br-none"
+                  }`}
+                >
+                  <div className="space-y-1">
+                    <div className="h-3 min-w-20 bg-violet-500/10 rounded" />
+                    <div className="h-3 min-w-20 bg-violet-500/10 rounded" />
+                  </div>
+                </Skeleton>
+                <Skeleton className={`h-4 ${isSender? "" : "ml-auto"} w-12 bg-violet-500/10`}/>
               </div>
+            </div>
           </div>
         );
       })}

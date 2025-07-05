@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { axiosInstance } from "../lib/axiosInstance";
 import toast from "react-hot-toast";
 import { io } from "socket.io-client";
+import { useChatStore } from "./messageStore";
 
 const BASE_URL = "http://localhost:8000/";
 
@@ -104,26 +105,43 @@ export const useAuthStore = create((set, get) => ({
   },
 
   connectSocket: () => {
-    const { authUser } = get();
-    if (!authUser || get().socket?.connected) return;
+    const { authUser, socket: existingSocket } = get();
+    if (!authUser || existingSocket?.connected) return;
 
     const socket = io(BASE_URL, {
       query: { userId: authUser._id },
+      autoConnect: true,
     });
 
-    socket.connect();
     set({ socket });
+    const { addNewMessage } = useChatStore.getState();
 
-    socket.on("getOnlineUsers", (onlineUsers) => {
-      set({ onlineUsers });
-    });
+    // setup listeners
+    const onOnlineUsers = (onlineUsers) => set({ onlineUsers });
+    const onNewMessage = (newMessage) => addNewMessage(newMessage);
+    const onConnect = () => console.log("socket connected");
+    const onDisconnect = () => console.log("socket disconnected");
+
+    socket.on("connect", onConnect);
+    socket.on("disconnect", onDisconnect);
+    socket.on("getOnlineUsers", onOnlineUsers);
+    socket.on("newMessage", onNewMessage);
+
+    // Return cleanup function for external use
+    return () => {
+      socket.off("connect", onConnect);
+      socket.off("disconnect", onDisconnect);
+      socket.off("getOnlineUsers", onOnlineUsers);
+      socket.off("newMessage", onNewMessage);
+      socket.disconnect();
+    };
   },
 
   disconnectSocket: () => {
-    const { socket, userId } = get(); 
+    const { socket, userId } = get();
 
     if (socket?.connected) {
-      socket.emit("user-disconnected", { userId }); 
+      socket.emit("user-disconnected", { userId });
       socket.disconnect();
     }
   },
