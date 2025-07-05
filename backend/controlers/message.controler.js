@@ -65,10 +65,12 @@ export const sendMessage = async (req, res) => {
     });
 
     // Emit new message to receiver's socket
-    // const receiverSocketId = userSocketMap[receiverId];
-    // if (receiverSocketId) {
-    //   io.to(receiverSocketId).emit("newMessage", newMessage);
-    // }
+    const receiverSocketId = userSocketMap[receiverId];
+    if (receiverSocketId) {
+      io.to(receiverSocketId).emit("newMessage", newMessage);
+    }
+
+    console.log(io);
 
     res.status(201).json({ 
       success: true, 

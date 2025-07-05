@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { MessageSquare } from "lucide-react";
 import { useAuthStore } from "../../stores/authStore";
 import { useChatStore } from "../../stores/messageStore";
-import { ImageDialog } from "./ImageDialog";
+import { MediaDialog } from "./MediaDialog";
 import { MessageBubble } from "./MessageBubble";
 import { MessageInput } from "./MessageInput";
 import { ChatHeader } from "./ChatHeader";
@@ -28,19 +28,18 @@ export const ChatContainer = ({ selectedUser, setSelectedUser }) => {
     // Scroll to the last message when chats update
     if (lastMessageRef.current) {
       lastMessageRef.current.scrollIntoView({
-        behavior: "smooth",
         block: "nearest",
-        inline: "start",
+        inline: "nearest",
       });
     }
   }, [chats]);
 
-  const handleSendMessage = async (imageFile) => {
-    if (message.trim() || imageFile) {
+  const handleSendMessage = async (file) => {
+    if (message.trim() || file) {
       try {
         const formData = new FormData();
         if (message.trim()) formData.append("text", message);
-        if (imageFile) formData.append("file", imageFile);
+        if (file) formData.append("file", file);
 
         await sendMessage(selectedUser._id, formData);
         setMessage("");
@@ -57,11 +56,11 @@ export const ChatContainer = ({ selectedUser, setSelectedUser }) => {
     }
   };
 
-  const openImageDialog = (imageUrl) => {
-    setSelectedImage(imageUrl);
+  const openMediaDialog = (fileUrl) => {
+    setSelectedImage(fileUrl);
   };
 
-  const closeImageDialog = () => {
+  const closeMediaDialog = () => {
     setSelectedImage(null);
   };
 
@@ -89,12 +88,13 @@ export const ChatContainer = ({ selectedUser, setSelectedUser }) => {
         onBackClick={() => setSelectedUser(null)}
       />
 
-      <div className="flex-1 overflow-y-auto p-4 space-y-4">
+      <div className="flex-1 overflow-y-auto p-4">
         {loadingChat ? (
           <MessagesSkeleton />
         ) : chats?.length > 0 ? (
           chats.map((msg, index) => (
             <div
+              className={`${index === chats.length - 1? "pb-10" : ""}`}
               key={msg._id}
               ref={index === chats.length - 1 ? lastMessageRef : null}
             >
@@ -105,7 +105,7 @@ export const ChatContainer = ({ selectedUser, setSelectedUser }) => {
                 receiverProfilePic={
                   selectedUser.profilePic || assets.avatar_icon
                 }
-                onImageClick={openImageDialog}
+                onImageClick={openMediaDialog}
               />
             </div>
           ))
@@ -135,7 +135,7 @@ export const ChatContainer = ({ selectedUser, setSelectedUser }) => {
       />
 
       {selectedImage && (
-        <ImageDialog imageUrl={selectedImage} onClose={closeImageDialog} />
+        <MediaDialog fileUrl={selectedImage} onClose={closeMediaDialog} />
       )}
     </div>
   );

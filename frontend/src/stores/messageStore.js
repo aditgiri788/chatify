@@ -14,7 +14,6 @@ export const useChatStore = create((set, get) => ({
     try {
       const response = await axiosInstance.get(`/message/${userId}`);
       const {messages} = response.data;
-      console.log(messages);
       set({ chats: messages });
     } catch (error) {
       console.error("Error fetching chats:", error);
@@ -54,6 +53,12 @@ export const useChatStore = create((set, get) => ({
     }
   },
 
+  // on.("newMessage") fetch the message
+
   // Clear chat state
   clearChats: () => set({ chats: [], error: null }),
+
+  addNewMessage: (newMessage)=>{
+    set({chats : [...get().chats, newMessage]})
+  },
 }));
