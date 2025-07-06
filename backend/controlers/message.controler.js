@@ -52,11 +52,13 @@ export const sendMessage = async (req, res) => {
 
     if(!file && !text) return res.status(400).json({message: "content missing"});
     console.log({file});
-    let url;
+    let url = null;
+    let fileName = null;
     if (file) {
       // Use your uploadStream method with file buffer
       const { secure_url } = await uploadStream(file, "chat_app",);
       url = secure_url;
+      fileName = file.originalname;
     }
 
     const newMessage = await Message.create({
@@ -65,7 +67,7 @@ export const sendMessage = async (req, res) => {
       text,
       file: url,
       fileType,
-      fileName: file.originalname,
+      fileName,
     });
 
     // Emit new message to receiver's socket

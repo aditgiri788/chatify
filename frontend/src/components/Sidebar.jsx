@@ -84,7 +84,7 @@ const Sidebar = ({ selectedUser, setSelectedUser }) => {
 
         {/* Search Bar */}
         <div className="bg-[#1a1a2e] rounded-full flex items-center gap-3 py-2 px-4 mt-5 focus-within:ring-2 focus-within:ring-purple-500 transition-all">
-          <Search className="w-4 h-4 text-gray-400" />
+          <Search className="shrink-0 w-4 h-4 text-gray-400" />
           <input
             type="text"
             placeholder="Search users..."

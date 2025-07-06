@@ -7,6 +7,7 @@ export const ChatHeader = ({
   onlineUsers,
   onBackClick,
   setShowRightSidebar,
+  showRightSidebar,
 }) => {
   return (
     <div className="flex-shrink-0 flex items-center justify-between p-4 border-b border-[#393a5a]">

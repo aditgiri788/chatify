@@ -16,15 +16,20 @@ import ImageBubbleSkeleton from "../skeletons/ImageBubbleSkeleton";
 import DocBubbleSkeleton from "../skeletons/DocBubbleSkeleton";
 
 const SKELETON = {
-  chat : <ChatBubbleSkeleton/>,
-  audio : <AudioBubbleSkeleton/>,
-  video : <VideoBubbleSkeleton/>,
-  image : <ImageBubbleSkeleton/>,
-  application : <DocBubbleSkeleton/>,
-  text : <DocBubbleSkeleton/>,
-}
+  chat: <ChatBubbleSkeleton />,
+  audio: <AudioBubbleSkeleton />,
+  video: <VideoBubbleSkeleton />,
+  image: <ImageBubbleSkeleton />,
+  application: <DocBubbleSkeleton />,
+  text: <DocBubbleSkeleton />,
+};
 
-export const ChatContainer = ({ selectedUser, setSelectedUser, setShowRightSidebar }) => {
+export const ChatContainer = ({
+  selectedUser,
+  setSelectedUser,
+  setShowRightSidebar,
+  showRightSidebar,
+}) => {
   const { onlineUsers, authUser } = useAuthStore();
   const { loadingChat, chats, getChats, sendMessage, sendingMessage } =
     useChatStore();
@@ -48,7 +53,7 @@ export const ChatContainer = ({ selectedUser, setSelectedUser, setShowRightSideb
         inline: "nearest",
       });
     }
-  }, [chats]);
+  }, [chats, sendingMessage]);
 
   const handleSendMessage = async (file) => {
     if (message.trim() || file) {
@@ -99,7 +104,11 @@ export const ChatContainer = ({ selectedUser, setSelectedUser, setShowRightSideb
 
   return (
     <>
-      <div className="h-full flex flex-col overflow-y-auto bg-[#0f0e17]/80 backdrop-blur-sm">
+      <div
+        className={`h-full flex flex-col overflow-y-auto bg-[#0f0e17]/80 backdrop-blur-sm
+        ${showRightSidebar ? "max-md:hidden" : ""}
+        `}
+      >
         <ChatHeader
           selectedUser={selectedUser}
           onlineUsers={onlineUsers}
@@ -141,7 +150,9 @@ export const ChatContainer = ({ selectedUser, setSelectedUser, setShowRightSideb
               </p>
             </div>
           )}
-          {sendingMessage && (SKELETON[sendingMessage])}
+          {sendingMessage && (
+            <div ref={lastMessageRef}>SKELETON[sendingMessage]</div>
+          )}
         </div>
 
         <MessageInput

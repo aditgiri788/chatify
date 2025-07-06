@@ -43,64 +43,64 @@ export default assets;
 
 export const extensionCategory = {
   // 🎥 Video
-  mov: "/video2.png",
-  mp4: "/video2.png",
-  mpeg: "/video2.png",
-  avi: "/video2.png",
-  flv: "/video2.png",
+  mov: "/video2.svg",
+  mp4: "/video2.svg",
+  mpeg: "/video2.svg",
+  avi: "/video2.svg",
+  flv: "/video2.svg",
 
   // 🎵 Audio
-  wav: "/audio.png",
-  mp3: "/audio.png",
-  mid: "/audio.png",
-  wma: "/audio.png",
+  wav: "/audio.svg",
+  mp3: "/audio.svg",
+  mid: "/audio.svg",
+  wma: "/audio.svg",
 
   // 💻 Code
-  html: "/code.png",
-  xml: "/code.png",
-  java: "/code.png",
-  dll: "/code.png",
+  html: "/code.svg",
+  xml: "/code.svg",
+  java: "/code.svg",
+  dll: "/code.svg",
 
   // 📄 Document
-  doc: "/document.png",
-  docx: "/document.png",
-  txt: "/document.png",
-  pub: "/document.png",
-  ps: "/document.png",
-  crd: "/document.png",
+  doc: "/word.svg",
+  docx: "/word.svg",
+  txt: "/document.svg",
+  pub: "/document.svg",
+  ps: "/document.svg",
+  crd: "/document.svg",
 
   // 🖼️ Image
-  jpg: "/image.png",
-  png: "/image.png",
-  bmp: "/image.png",
-  svg: "/image.png",
-  eps: "/image.png",
-  tiff: "/image.png",
-  giff: "/image.png",
-  raw: "/image.png",
-  psd: "/image.png",
-  ai: "/image.png",
+  jpg: "/image.svg",
+  png: "/image.svg",
+  bmp: "/image.svg",
+  svg: "/image.svg",
+  eps: "/image.svg",
+  tiff: "/image.svg",
+  giff: "/image.svg",
+  raw: "/image.svg",
+  psd: "/image.svg",
+  ai: "/image.svg",
 
   // 📊 Spreadsheet
-  xsl: "/spreadsheet.png",
-  csv: "/spreadsheet.png",
-  mdb: "/spreadsheet.png",
-  dwg: "/spreadsheet.png",
+  xsl: "/spreadsheet.svg",
+  csv: "/spreadsheet.svg",
+  mdb: "/spreadsheet.svg",
+  dwg: "/spreadsheet.svg",
 
   // 📚 PDF
-  pdf: "/pdf.png",
+  pdf: "/pdf.svg",
 
   // 🗜️ Archive
-  zip: "/zip.png",
-  rar: "/zip.png",
-  iso: "/zip.png",
+  zip: "/zip.svg",
+  rar: "/zip.svg",
+  iso: "/zip.svg",
 
   // 📰 RSS
-  rss: "/document.png",
+  rss: "/document.svg",
 };
 
 export const getExtensionIcon = (ext) => {
-  return extensionCategory[ext.toLowerCase()] || "/empty.png";
+  return extensionCategory[ext.toLowerCase()] || "/empty.svg";
 };
 
 

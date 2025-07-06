@@ -39,7 +39,7 @@ export const MediaDialog = ({ fileUrl, onClose }) => {
                   e.stopPropagation();
                   toggleFullscreen();
                 }}
-                className="absolute top-4 right-4 p-2 bg-black/50 rounded-full"
+                className="absolute top-4 right-4 p-2 bg-black/20 rounded-full"
               >
                 <X className="h-6 w-6 text-white" />
               </button>
@@ -99,7 +99,7 @@ export const MediaDialog = ({ fileUrl, onClose }) => {
 
   return (
     <div 
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/20 backdrop-blur-sm"
       onClick={onClose}
     >
       <div 
@@ -126,7 +126,7 @@ export const MediaDialog = ({ fileUrl, onClose }) => {
             </div>
             
             {/* Content */}
-            <div className="flex items-center justify-center p-4">
+            <div className="flex items-center justify-center">
               {renderMedia()}
             </div>
             

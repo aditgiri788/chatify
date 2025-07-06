@@ -27,10 +27,13 @@ const HomePage = () => {
           selectedUser={selectedUser}
           setSelectedUser={setSelectedUser}
           setShowRightSidebar={setShowRightSidebar}
+          showRightSidebar={showRightSidebar}
         />
         <RightSidebar
           selectedUser={selectedUser}
           setSelectedUser={setSelectedUser}
+          setShowRightSidebar={setShowRightSidebar}
+          showRightSidebar={showRightSidebar}
         />
       </div>
     </div>
