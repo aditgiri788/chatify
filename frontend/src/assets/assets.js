@@ -41,6 +41,69 @@ const assets = {
 
 export default assets;
 
+export const extensionCategory = {
+  // 🎥 Video
+  mov: "/video2.png",
+  mp4: "/video2.png",
+  mpeg: "/video2.png",
+  avi: "/video2.png",
+  flv: "/video2.png",
+
+  // 🎵 Audio
+  wav: "/audio.png",
+  mp3: "/audio.png",
+  mid: "/audio.png",
+  wma: "/audio.png",
+
+  // 💻 Code
+  html: "/code.png",
+  xml: "/code.png",
+  java: "/code.png",
+  dll: "/code.png",
+
+  // 📄 Document
+  doc: "/document.png",
+  docx: "/document.png",
+  txt: "/document.png",
+  pub: "/document.png",
+  ps: "/document.png",
+  crd: "/document.png",
+
+  // 🖼️ Image
+  jpg: "/image.png",
+  png: "/image.png",
+  bmp: "/image.png",
+  svg: "/image.png",
+  eps: "/image.png",
+  tiff: "/image.png",
+  giff: "/image.png",
+  raw: "/image.png",
+  psd: "/image.png",
+  ai: "/image.png",
+
+  // 📊 Spreadsheet
+  xsl: "/spreadsheet.png",
+  csv: "/spreadsheet.png",
+  mdb: "/spreadsheet.png",
+  dwg: "/spreadsheet.png",
+
+  // 📚 PDF
+  pdf: "/pdf.png",
+
+  // 🗜️ Archive
+  zip: "/zip.png",
+  rar: "/zip.png",
+  iso: "/zip.png",
+
+  // 📰 RSS
+  rss: "/document.png",
+};
+
+export const getExtensionIcon = (ext) => {
+  return extensionCategory[ext.toLowerCase()] || "/empty.png";
+};
+
+
 // export const imagesDummyData = [pic1, pic2, pic3, pic4, pic1, pic2]
 
 export const userDummyData = [

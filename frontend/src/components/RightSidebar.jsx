@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { Image, Video, FileText, Mic, Link, Smile, Clock, Circle } from "lucide-react";
-import assets from "../assets/assets";
+import { Image, Video, FileText, Mic, Link, Smile, Clock, Circle, ArrowLeftIcon } from "lucide-react";
+import assets, { getExtensionIcon } from "../assets/assets";
 import { useAuthStore } from "../stores/authStore";
 import { formatMessageTime, generateThumbnailUrl, getMediaTypeFromUrl } from "../lib/utils";
 import { useChatStore } from "../stores/messageStore";
 import { MediaDialog } from "./chatContainer/MediaDialog";
 
-const RightSidebar = ({ selectedUser }) => {
+const RightSidebar = ({ selectedUser, setShowRightSidebar }) => {
   const { onlineUsers } = useAuthStore();
   const { chats } = useChatStore();
   const [selectedMedia, setSelectedMedia] = useState(null);
@@ -16,6 +16,7 @@ const RightSidebar = ({ selectedUser }) => {
     if (chat.file) {
       const fileUrl = chat.file;
       let fileType = getMediaTypeFromUrl(fileUrl);
+      let extension = fileUrl.split('.').pop().toLowerCase();
       
       // For video thumbnails - adjust based on your storage solution
       const thumbnailUrl = fileType === 'video' 
@@ -26,6 +27,7 @@ const RightSidebar = ({ selectedUser }) => {
         type: fileType,
         url: fileUrl,
         thumbnailUrl,
+        extension,
         timestamp: chat.createdAt
       });
     }
@@ -36,15 +38,12 @@ const RightSidebar = ({ selectedUser }) => {
   const isOnline = onlineUsers.includes(selectedUser?._id);
   const lastSeen = selectedUser?.lastSeen || new Date();
 
-  const getMediaIcon = (type) => {
-    const iconProps = { className: "h-4 w-4" };
-    switch (type) {
-      case "image": return <Image {...iconProps} />;
-      case "video": return <Video {...iconProps} />;
-      case "file": return <FileText {...iconProps} />;
-      case "audio": return <Mic {...iconProps} />;
-      default: return <Link {...iconProps} />;
-    }
+  const getMediaIcon = (url) => {
+    console.log("Media URL:", url);
+    if (!url) return null;
+    const ext = getExtensionIcon(url.split('.').pop().toLowerCase());
+    const iconClass = "size-10";
+    return <img src={ext} alt="Media icon" className={iconClass}/>
   };
 
   const getStatusIndicator = () => {
@@ -66,6 +65,13 @@ const RightSidebar = ({ selectedUser }) => {
   return (
     <div className={`bg-[#0f0e17]/80 text-white w-full h-full overflow-y-auto ${selectedUser ? "max-md:hidden" : ""}`}>
       {/* User Profile Section */}
+      <button 
+        className="p-2 md:hidden bg-[#1a1a2e] hover:bg-[#282142]/50 rounded-full absolute top-4 left-4" 
+        onClick={()=>setShowRightSidebar((prev) => !prev)}
+        title="Back to chats"
+      >
+        <ArrowLeftIcon/>
+      </button>
       <div className="p-6 flex flex-col items-center gap-4 text-center border-b border-[#393a5a]">
         <div className="relative">
           <img
@@ -111,7 +117,7 @@ const RightSidebar = ({ selectedUser }) => {
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center text-gray-400">
-                    {getMediaIcon(item.type)}
+                    {getMediaIcon(item.extension)}
                   </div>
                 )}
                 {item.type === 'video' && (

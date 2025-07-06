@@ -4,7 +4,7 @@ import { create } from "zustand";
 
 export const useChatStore = create((set, get) => ({
   loadingChat: false,
-  sendingMessage: false,
+  sendingMessage: null,
   chats: [],
   error: null,
 
@@ -13,7 +13,7 @@ export const useChatStore = create((set, get) => ({
     set({ loadingChat: true, error: null });
     try {
       const response = await axiosInstance.get(`/message/${userId}`);
-      const {messages} = response.data;
+      const { messages } = response.data;
       set({ chats: messages });
     } catch (error) {
       console.error("Error fetching chats:", error);
@@ -27,7 +27,8 @@ export const useChatStore = create((set, get) => ({
 
   // Send a new message with potential image
   sendMessage: async (receiverId, formData) => {
-    set({ sendingMessage: true, error: null });
+    set({ sendingMessage: formData.get("fileType") || "chat", error: null });
+    console.log(formData.get("file"));
     try {
       const response = await axiosInstance.post(
         `/message/send/${receiverId}`,
@@ -47,9 +48,9 @@ export const useChatStore = create((set, get) => ({
       return response.data;
     } catch (error) {
       console.error("Error sending message:", error);
-      toast.error(error.response?.data?.message || "Failed to send message")
+      toast.error(error.response?.data?.message || "Failed to send message");
     } finally {
-      set({ sendingMessage: false, error: null });
+      set({ sendingMessage: null, error: null });
     }
   },
 
@@ -58,7 +59,7 @@ export const useChatStore = create((set, get) => ({
   // Clear chat state
   clearChats: () => set({ chats: [], error: null }),
 
-  addNewMessage: (newMessage)=>{
-    set({chats : [...get().chats, newMessage]})
+  addNewMessage: (newMessage) => {
+    set({ chats: [...get().chats, newMessage] });
   },
 }));

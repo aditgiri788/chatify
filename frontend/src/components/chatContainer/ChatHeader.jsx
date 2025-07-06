@@ -1,11 +1,12 @@
 import React from "react";
-import { ArrowLeft, HelpCircle } from "lucide-react";
+import { ArrowLeft, HelpCircle, Info } from "lucide-react";
 import assets from "../../assets/assets";
 
-export const ChatHeader = ({ 
-  selectedUser, 
-  onlineUsers, 
-  onBackClick 
+export const ChatHeader = ({
+  selectedUser,
+  onlineUsers,
+  onBackClick,
+  setShowRightSidebar,
 }) => {
   return (
     <div className="flex-shrink-0 flex items-center justify-between p-4 border-b border-[#393a5a]">
@@ -29,14 +30,17 @@ export const ChatHeader = ({
             )}
           </p>
           <p className="text-xs text-gray-400">
-            {onlineUsers.includes(selectedUser._id) 
-              ? "Online" 
-              : `Last seen ${selectedUser.lastSeen || 'recently'}`}
+            {onlineUsers.includes(selectedUser._id)
+              ? "Online"
+              : `Last seen ${selectedUser.lastSeen || "recently"}`}
           </p>
         </div>
       </div>
-      <button className="p-2 rounded-full hover:bg-[#282142]/50">
-        <HelpCircle className="h-5 w-5 text-gray-300" />
+      <button
+        className="p-2 md:hidden cursor-pointer rounded-full hover:bg-[#282142]/50"
+        onClick={()=>setShowRightSidebar((prev) => !prev)}
+      >
+        <Info className="h-5 w-5 text-gray-300" />
       </button>
     </div>
   );

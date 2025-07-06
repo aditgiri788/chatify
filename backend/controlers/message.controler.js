@@ -45,15 +45,17 @@ export const markMessageAsSeen = async (req, res) => {
 
 export const sendMessage = async (req, res) => {
   try {
-    const { text } = req.body;
+    const { text, fileType="unknown" } = req.body;
     const receiverId = req.params.id;
     const senderId = req.user._id;
     const file = req.file; 
 
+    if(!file && !text) return res.status(400).json({message: "content missing"});
+    console.log({file});
     let url;
     if (file) {
       // Use your uploadStream method with file buffer
-      const { secure_url } = await uploadStream(file.buffer, "chat_app");
+      const { secure_url } = await uploadStream(file, "chat_app",);
       url = secure_url;
     }
 
@@ -62,6 +64,8 @@ export const sendMessage = async (req, res) => {
       receiverId,
       text,
       file: url,
+      fileType,
+      fileName: file.originalname,
     });
 
     // Emit new message to receiver's socket
@@ -69,8 +73,6 @@ export const sendMessage = async (req, res) => {
     if (receiverSocketId) {
       io.to(receiverSocketId).emit("newMessage", newMessage);
     }
-
-    console.log(io);
 
     res.status(201).json({ 
       success: true, 
