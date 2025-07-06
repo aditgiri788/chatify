@@ -60,6 +60,8 @@ const RightSidebar = ({
     if (mediaFilter === "image") return file.type === "image";
     if (mediaFilter === "video") return file.type === "video";
     if (mediaFilter === "doc") return file.type !== "image" && file.type !== "video";
+    if (mediaFilter === "audio") return file.type === "audio";
+
     return true;
   }).reverse();
 
@@ -70,6 +72,7 @@ const RightSidebar = ({
     { key: "all", label: "All", icon: null, title: "All media" },
     { key: "image", label: "", icon: <Image className="h-4 w-4" />, title: "Images", },
     { key: "video", label: "", icon: <Video className="h-4 w-4" />, title: "Videos", },
+    { key: "audio", label: "", icon: <Mic className="h-4 w-4" />, title: "Audio files" },
     { key: "doc", label: "", icon: <FileText className="h-4 w-4" />, title: "Documents", },
   ];
 
@@ -138,19 +141,19 @@ const RightSidebar = ({
       <div className="p-4 flex-1 overflow-y-auto">
         <div className="flex justify-between items-center mb-3">
           <h3 className="text-sm font-medium text-gray-300 flex items-center gap-2">
-            <Image className="h-4 w-4" />
-            Shared Media{" "}
+            <Image className="h-4 w-4 shrink-0" />
+            Media{" "}
             {filteredMediaFiles.length > 0 && `(${filteredMediaFiles.length})`}
           </h3>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1">
             {mediaOptions.map(({ key, label, icon, title }) => {
               const isActive = mediaFilter === key;
               return (
                 <button
                   key={key}
                   onClick={() => setMediaFilter(key)}
-                  className={`flex items-center justify-center text-sm size-10 rounded transition-colors duration-200 ${
+                  className={`cursor-pointer hover:brightness-90 flex items-center justify-center text-sm size-8 rounded transition-colors duration-200 ${
                     isActive
                       ? "bg-[#393a5a] text-white"
                       : "text-gray-400 hover:text-white hover:bg-[#2e2f4a]"
