@@ -1,0 +1,26 @@
+<svg width="40" height="41" viewBox="0 0 40 41" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_2001_3263)">
+<path d="M34.9998 8.6597V36.7025C34.9998 38.9117 33.209 40.7025 30.9998 40.7025H9C6.79086 40.7025 5 38.9117 5 36.7025V4.70252C5 2.49338 6.79086 0.702515 9 0.702515H26.3367L34.9998 8.6597Z" fill="#6172F3"/>
+<path d="M16 32.7025C17.1046 32.7025 18 31.8071 18 30.7025C18 29.5979 17.1046 28.7025 16 28.7025C14.8954 28.7025 14 29.5979 14 30.7025C14 31.8071 14.8954 32.7025 16 32.7025Z" stroke="white" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M18 30.7025V22.0358L26 20.7025V29.3692" stroke="white" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M24 31.3692C25.1046 31.3692 26 30.4738 26 29.3692C26 28.2646 25.1046 27.3692 24 27.3692C22.8954 27.3692 22 28.2646 22 29.3692C22 30.4738 22.8954 31.3692 24 31.3692Z" stroke="white" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+<g filter="url(#filter0_d_2001_3263)">
+<path d="M34.9998 8.6597H27.3367C26.7844 8.6597 26.3367 8.21199 26.3367 7.6597V0.702515L34.9998 8.6597Z" fill="#C7D7FE"/>
+</g>
+</g>
+<defs>
+<filter id="filter0_d_2001_3263" x="23.3367" y="-0.297485" width="12.6631" height="11.9572" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dx="-1" dy="1"/>
+<feGaussianBlur stdDeviation="1"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_2001_3263"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_2001_3263" result="shape"/>
+</filter>
+<clipPath id="clip0_2001_3263">
+<rect width="40" height="40" fill="white" transform="translate(0 0.702515)"/>
+</clipPath>
+</defs>
+</svg>
