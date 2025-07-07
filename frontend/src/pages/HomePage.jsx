@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import Sidebar from "../components/Sidebar";
 import RightSidebar from "../components/RightSidebar";
-import {ChatContainer} from "../components/chatContainer/ChatContainer.jsx";
+import { ChatContainer } from "../components/chatContainer/ChatContainer.jsx";
 
 //here is define when we click on user than it will make grid according to its ratio
 
 const HomePage = () => {
   const [selectedUser, setSelectedUser] = useState(false); // moved inside component
+  const [showRightSidebar, setShowRightSidebar] = useState(false);
+
   return (
     <div className="border max-w-screen-xl mx-auto h-svh">
       <div
@@ -24,10 +26,14 @@ const HomePage = () => {
         <ChatContainer
           selectedUser={selectedUser}
           setSelectedUser={setSelectedUser}
+          setShowRightSidebar={setShowRightSidebar}
+          showRightSidebar={showRightSidebar}
         />
         <RightSidebar
           selectedUser={selectedUser}
           setSelectedUser={setSelectedUser}
+          setShowRightSidebar={setShowRightSidebar}
+          showRightSidebar={showRightSidebar}
         />
       </div>
     </div>
