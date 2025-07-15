@@ -39,7 +39,7 @@ io.on("connection", (socket) => {
       io.emit("getOnlineUsers", Object.keys(userSocketMap));
 
       try {
-        await User.findByIdAndUpdate(userId, {lastSeen: new Date()});
+        await User.findByIdAndUpdate(userId, { lastSeen: new Date() });
       } catch (error) {
         console.log(error);
       }
@@ -49,25 +49,27 @@ io.on("connection", (socket) => {
 
 // Middlewares
 app.use(express.json({ limit: "4mb" }));
-app.use(cors({
-  origin: ["http://localhost:5173", "http://localhost:5174"], 
-  credentials: true                                           
-}));
+app.use(
+  cors({
+    origin: ["http://localhost:5173", "http://localhost:5174"],
+    credentials: true,
+  })
+);
 app.use(cookieParser());
 
-app.get('/', (req, res)=>{
+app.get("/", (req, res) => {
   res.status(200).json({
     message: "Welcome to Chatify API",
-  })
+  });
 });
 
 app.use("/api/status", (req, res) => res.send("Server is running"));
 app.use("/api/auth", userRouter);
 app.use("/api/message", messageRouter);
 
-if(process.env.NODE_ENV === "production") {
+if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../frontend/dist")));
-  app.get("*", (req, res) => {
+  app.get("/{*any}", (req, res) => {
     res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
   });
 }
