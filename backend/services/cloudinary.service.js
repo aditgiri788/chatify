@@ -4,7 +4,7 @@ import cloudinary from "../lib/cloudinary.js";
 export const uploadStream = (file, folder = "default_folder") => {
   const buffer = file.buffer;
   const mimetype = file.mimetype || "application/octet-stream";
-  const originalname = file.originalname;
+  const originalname = file.originalname || "file";
 
   return new Promise((resolve, reject) => {
     const isRaw = mimetype.startsWith("application/") || mimetype.startsWith("text/");

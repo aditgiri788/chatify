@@ -91,7 +91,7 @@ export const updateProfile = async (req, res) => {
 
       // Upload new profile picture
       const folder = `user_profiles/${user._id}`;
-      const { secure_url } = await uploadStream(file.buffer, folder);
+      const { secure_url } = await uploadStream(file, folder);
       updateData.profilePic = secure_url;
     }
 

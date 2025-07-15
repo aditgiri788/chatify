@@ -8,6 +8,10 @@ import userRouter from "./routes/user.route.js";
 import messageRouter from "./routes/message.route.js";
 import cookieParser from "cookie-parser";
 import User from "./models/user.js";
+import path from "path";
+
+const PORT = process.env.PORT || 5000;
+const __dirname = path.resolve();
 
 const app = express();
 
@@ -56,12 +60,19 @@ app.get('/', (req, res)=>{
     message: "Welcome to Chatify API",
   })
 });
+
 app.use("/api/status", (req, res) => res.send("Server is running"));
 app.use("/api/auth", userRouter);
 app.use("/api/message", messageRouter);
 
+if(process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../frontend/dist")));
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
+  });
+}
+
 // Connect to MongoDB and start server
 await connectDB();
 
-const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => console.log("Server is on the Port: " + PORT));
