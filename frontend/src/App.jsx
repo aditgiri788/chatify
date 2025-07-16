@@ -16,13 +16,13 @@ const App = () => {
   
   if(checkingAuth){
     return(
-      <div className="text-white flex items-center justify-center h-screen">
+      <div className="text-white flex items-center justify-center h-svh">
         <Loader className="animate-spin"/>
       </div>
     );
   }
   return (
-    <div className=" h-screen bg-no-repeat bg-center bg-[url('./src/assets/bgImage.svg')] bg-contain">
+    <div className=" h-svh bg-no-repeat bg-center bg-[url('./src/assets/bgImage.svg')] bg-contain">
       <Toaster position="top-right" />
       <Routes>
         <Route path="/" element={authUser ? <HomePage /> : <Navigate to="/login" />} />

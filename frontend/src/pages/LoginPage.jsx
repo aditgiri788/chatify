@@ -42,7 +42,7 @@ const LoginPage = () => {
   //this means it is false
   return (
     <div
-      className="min-h-screen backdrop-blur-2xl bg-cover bg-center flex items-center justify-center gap-8 sm:justify-evenly
+      className="min-h-svh backdrop-blur-2xl bg-cover bg-center flex items-center justify-center gap-8 sm:justify-evenly
     max-sm:flex-col 
     "
     >

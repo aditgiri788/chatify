@@ -103,7 +103,7 @@ const RightSidebar = ({
   return (
     <div
       className={`bg-[#0f0e17]/80 text-white w-full h-full overflow-y-auto ${
-        selectedUser && !showRightSidebar ? "max-md:hidden" : ""
+        selectedUser && !showRightSidebar ? "max-lg:hidden" : ""
       }`}
     >
       {/* User Profile Section */}
