@@ -57,7 +57,7 @@ app.use(
 );
 app.use(cookieParser());
 
-app.get("/", (req, res) => {
+app.get("/api", (req, res) => {
   res.status(200).json({
     message: "Welcome to Chatify API",
   });
